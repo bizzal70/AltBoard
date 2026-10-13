@@ -1,0 +1,12 @@
+## Interface: 16001
+## Title: AltBoard
+## Notes: All your characters at a glance: level, gold, where they are, rested experience, professions and bag space. Type /alts.
+## Author: bizzal70
+## Version: 0.1.0
+## SavedVariables: AltBoardDB
+## IconTexture: Interface\Icons\INV_Misc_GroupLooking
+## AddonCompartmentFunc: AltBoard_OnAddonCompartmentClick
+
+Core.lua
+Window.lua
+MinimapButton.lua
