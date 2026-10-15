@@ -39,6 +39,15 @@ You can also remove a character with the small **x** at the end of their row; it
 - **Nothing is sent anywhere.** The list is saved on your own computer with the game's other saved settings.
 - It records the bags a character carries, not their bank.
 
+## More from this author
+
+Other small addons for World of Warcraft: Forever, all free:
+
+- **[GatherTrail](https://github.com/bizzal70/GatherTrail)** remembers ore, herbs, fishing pools, skinning spots, chests and rares across all your characters, and guides you back to the best spots.
+- **[MouseTip](https://www.curseforge.com/wow/addons/mousetip)** shows tooltips at your mouse cursor.
+- **[RangeShade](https://www.curseforge.com/wow/addons/rangeshade)** shades action buttons red when your target is out of range.
+- **[VendorMate](https://github.com/bizzal70/VendorMate)** sells junk and repairs at vendors, and warns when your gear is wearing out.
+
 ## Installing
 
 Copy this folder into `World of Warcraft\_classic_beta_\Interface\AddOns\` as `AltBoard`, restart the game, and enable AltBoard on the character select screen.
