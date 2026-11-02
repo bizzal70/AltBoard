@@ -52,7 +52,7 @@ Other small addons for World of Warcraft: Forever, all free:
 
 ## Installing
 
-Copy this folder into `World of Warcraft\_classic_beta_\Interface\AddOns\` as `AltBoard`, restart the game, and enable AltBoard on the character select screen.
+Copy this folder into `World of Warcraft\_forever_\Interface\AddOns\` as `AltBoard`, restart the game, and enable AltBoard on the character select screen.
 
 ## Developing
 
