@@ -49,6 +49,7 @@ Other small addons for World of Warcraft: Forever, all free:
 - **[VendorMate](https://github.com/bizzal70/VendorMate)** sells junk and repairs at vendors, and warns when your gear is wearing out.
 - **[SwiftQuest](https://github.com/bizzal70/SwiftQuest)** accepts quests and hands them in as soon as you talk to the quest giver, without ever choosing a reward for you.
 - **[SessionRecap](https://github.com/bizzal70/SessionRecap)** keeps a running tally of your play session: gold, experience per hour, quests, gathering and loot.
+- **[MacroKit](https://github.com/bizzal70/MacroKit)** adds ready-made macros for your class and spec (Paladin so far) and never overwrites your own.
 
 ## Installing
 
