@@ -28,13 +28,13 @@ C_ClassColor = { GetClassColor = function(classFile) if classFile == "MAGE" then
 local clock = 1800000000
 time = function() return clock end
 
-local ns = LoadAddon(ADDON_DIR, "AltBoard")
+local ns = LoadAddon(ADDON_DIR, "AltGlance")
 local function check(cond, what) if not cond then error("CHECK FAILED: " .. what, 2) end; io.write("pass  ", what, "\n") end
 local function near(a, b) return math.abs(a - b) < 0.0001 end
 
 Fire("PLAYER_LOGIN")
-check(AltBoardDB == nil, "before its settings load, nothing is recorded")
-Fire("ADDON_LOADED", "AltBoard"); Fire("PLAYER_LOGIN")
+check(AltGlanceDB == nil, "before its settings load, nothing is recorded")
+Fire("ADDON_LOADED", "AltGlance"); Fire("PLAYER_LOGIN")
 local me = ns.db.chars["Player-1"]
 check(me and me.name == "Mirabel" and me.level == 12 and me.money == 23456 and me.zone == "Elwynn Forest" and me.classFile == "MAGE" and me.faction == "Alliance" and me.realm == "Stonehold", "logging in records the character")
 check(#me.professions == 2 and me.professions[1].name == "Mining" and me.professions[1].level == 45 and me.professions[1].max == 75, "with their professions")
@@ -93,8 +93,8 @@ clock = clock - 400 * 3600
 check(ns.Money(1234567) == "123g 45s 67c" and ns.Ago(clock - 7200) == "2 h ago" and ns.Ago(clock - 3 * 86400) == "3 days ago", "money and elapsed time are written plainly")
 
 -- the window
-SlashCmdList.ALTBOARD("")
-check(AltBoardWindow:IsShown(), "/alts opens the list")
+SlashCmdList.ALTGLANCE("")
+check(AltGlanceWindow:IsShown(), "/alts opens the list")
 local shown = {}
 for _, f in ipairs(Frames()) do
     if rawget(f, "cells") and f.__shown then shown[#shown + 1] = f end
@@ -137,26 +137,26 @@ row.remove.__scripts.OnClick(row.remove)
 check(ns.db.chars["Player-2"] == nil and #ns.Characters() == 2, "a second press does")
 row.remove.__scripts.OnEnter(row.remove)
 
-SlashCmdList.ALTBOARD("forget aar")
+SlashCmdList.ALTGLANCE("forget aar")
 check(ns.db.chars["Player-3"] ~= nil, "/alts forget will not remove the character being played")
-SlashCmdList.ALTBOARD("forget nobody")
-SlashCmdList.ALTBOARD("forget mira")
+SlashCmdList.ALTGLANCE("forget nobody")
+SlashCmdList.ALTGLANCE("forget mira")
 check(ns.db.chars["Player-1"] == nil and #ns.Characters() == 1, "/alts forget removes a character by the start of their name")
 
 -- the minimap button
-check(AltBoardMinimapButton.__shown, "the minimap button shows by default")
-AltBoardMinimapButton.__scripts.OnClick(AltBoardMinimapButton)
-check(not AltBoardWindow:IsShown(), "and toggles the list")
-AltBoardMinimapButton.__scripts.OnEnter(AltBoardMinimapButton)
-AltBoardMinimapButton.__scripts.OnDragStart(AltBoardMinimapButton)
-AltBoardMinimapButton.__scripts.OnUpdate(AltBoardMinimapButton, 0.1)
-AltBoardMinimapButton.__scripts.OnDragStop(AltBoardMinimapButton)
-SlashCmdList.ALTBOARD("button")
-check(not AltBoardMinimapButton.__shown and not ns.db.minimapButton, "/alts button hides it")
-SlashCmdList.ALTBOARD("button")
-AltBoard_OnAddonCompartmentClick()
-check(AltBoardWindow:IsShown(), "the minimap addon list entry opens the list")
-SlashCmdList.ALTBOARD("help")
+check(AltGlanceMinimapButton.__shown, "the minimap button shows by default")
+AltGlanceMinimapButton.__scripts.OnClick(AltGlanceMinimapButton)
+check(not AltGlanceWindow:IsShown(), "and toggles the list")
+AltGlanceMinimapButton.__scripts.OnEnter(AltGlanceMinimapButton)
+AltGlanceMinimapButton.__scripts.OnDragStart(AltGlanceMinimapButton)
+AltGlanceMinimapButton.__scripts.OnUpdate(AltGlanceMinimapButton, 0.1)
+AltGlanceMinimapButton.__scripts.OnDragStop(AltGlanceMinimapButton)
+SlashCmdList.ALTGLANCE("button")
+check(not AltGlanceMinimapButton.__shown and not ns.db.minimapButton, "/alts button hides it")
+SlashCmdList.ALTGLANCE("button")
+AltGlance_OnAddonCompartmentClick()
+check(AltGlanceWindow:IsShown(), "the minimap addon list entry opens the list")
+SlashCmdList.ALTGLANCE("help")
 
 -- the game misbehaving must not leave an error on screen
 UnitXPMax = function() error("something this client does differently") end

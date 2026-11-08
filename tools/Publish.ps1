@@ -15,7 +15,7 @@
 #>
 param(
     [string]$Message = "Update",
-    [string]$Repo = "bizzal70/AltBoard",
+    [string]$Repo = "bizzal70/AltGlance",
     [string]$Tag,
     [switch]$SkipTests
 )
@@ -34,7 +34,7 @@ if (-not $SkipTests) {
     Write-Host "Tests passed."
 }
 
-$tmp = Join-Path $env:TEMP ("altboard-publish-" + [guid]::NewGuid().ToString("N"))
+$tmp = Join-Path $env:TEMP ("altglance-publish-" + [guid]::NewGuid().ToString("N"))
 
 try {
     gh repo clone $Repo $tmp

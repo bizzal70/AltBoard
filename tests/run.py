@@ -18,10 +18,10 @@ lua = lua51.LuaRuntime(unpack_returned_tuples=True)
 lua.globals().ADDON_DIR = ADDON.as_posix()
 lua.execute((TESTS / "wow_stub.lua").read_text(encoding="utf-8"))
 try:
-    lua.execute((TESTS / "test_altboard.lua").read_text(encoding="utf-8"))
-    print("test_altboard.lua: ALL PASSED")
+    lua.execute((TESTS / "test_altglance.lua").read_text(encoding="utf-8"))
+    print("test_altglance.lua: ALL PASSED")
 except Exception as error:
-    print(f"test_altboard.lua: ERROR: {error}")
+    print(f"test_altglance.lua: ERROR: {error}")
     sys.exit(1)
 
 

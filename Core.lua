@@ -26,7 +26,7 @@ local defaults = {
 }
 
 function ns.Print(msg)
-    print("|cffd9a066AltBoard|r: " .. tostring(msg))
+    print("|cffd9a066AltGlance|r: " .. tostring(msg))
 end
 
 -- A value the client may withhold cannot be compared or stored.
@@ -220,9 +220,9 @@ local function FindByName(text)
     return found, "no character on record has a name starting with that"
 end
 
-SLASH_ALTBOARD1 = "/altboard"
-SLASH_ALTBOARD2 = "/alts"
-SlashCmdList.ALTBOARD = function(msg)
+SLASH_ALTGLANCE1 = "/altglance"
+SLASH_ALTGLANCE2 = "/alts"
+SlashCmdList.ALTGLANCE = function(msg)
     local command, rest = (msg or ""):match("^%s*(%S*)%s*(.-)%s*$")
     command = command:lower()
     if command == "" then
@@ -249,7 +249,7 @@ SlashCmdList.ALTBOARD = function(msg)
 end
 
 -- Entry in the minimap's addon list.
-function AltBoard_OnAddonCompartmentClick()
+function AltGlance_OnAddonCompartmentClick()
     ns.ToggleWindow()
 end
 
@@ -266,14 +266,14 @@ frame:RegisterEvent("PLAYER_LOGIN")
 frame:SetScript("OnEvent", function(self, event, loaded)
     if event == "ADDON_LOADED" then
         if loaded ~= addonName then return end
-        AltBoardDB = AltBoardDB or {}
+        AltGlanceDB = AltGlanceDB or {}
         for key, value in pairs(defaults) do
-            if AltBoardDB[key] == nil then
-                AltBoardDB[key] = value
+            if AltGlanceDB[key] == nil then
+                AltGlanceDB[key] = value
             end
         end
-        AltBoardDB.chars = AltBoardDB.chars or {}
-        ns.db = AltBoardDB
+        AltGlanceDB.chars = AltGlanceDB.chars or {}
+        ns.db = AltGlanceDB
         self:UnregisterEvent("ADDON_LOADED")
         return
     end

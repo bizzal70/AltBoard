@@ -1,10 +1,12 @@
-# AltBoard
+# AltGlance
 
 All your characters at a glance: level, gold, where they are, rested experience, professions and bag space. An addon for World of Warcraft: Forever (client 1.60.x).
 
+Formerly called AltBoard. It was renamed in 0.2.0 because another Forever addon, Allemano AltBoard, already uses that name and folder on CurseForge. `/alts` still opens it.
+
 ## What it does
 
-AltBoard keeps a line on every character on your account and shows them all in one window, from whichever character you are playing:
+AltGlance keeps a line on every character on your account and shows them all in one window, from whichever character you are playing:
 
 | Column | |
 |---|---|
@@ -21,9 +23,9 @@ Click a column heading to sort by it; click again to reverse. Hover a row for mo
 
 ## Using it
 
-Click the AltBoard button on the minimap, or type `/alts`.
+Click the AltGlance button on the minimap, or type `/alts`.
 
-A character appears in the list once you have logged in to them with AltBoard enabled, and their line is brought up to date each time you play them. Characters you have not played since installing it are not listed yet.
+A character appears in the list once you have logged in to them with AltGlance enabled, and their line is brought up to date each time you play them. Characters you have not played since installing it are not listed yet.
 
 | Command | What it does |
 |---|---|
@@ -35,7 +37,7 @@ You can also remove a character with the small **x** at the end of their row; it
 
 ## Good to know
 
-- **Rested experience is estimated** for characters you are not playing. AltBoard knows how much they had when you logged out and whether they were in an inn or city, and works out how much has built up since. Estimates are marked with `~`.
+- **Rested experience is estimated** for characters you are not playing. AltGlance knows how much they had when you logged out and whether they were in an inn or city, and works out how much has built up since. Estimates are marked with `~`.
 - **Nothing is sent anywhere.** The list is saved on your own computer with the game's other saved settings.
 - It records the bags a character carries, not their bank.
 
@@ -54,7 +56,7 @@ Other small addons for World of Warcraft: Forever, all free:
 
 ## Installing
 
-Copy this folder into `World of Warcraft\_forever_\Interface\AddOns\` as `AltBoard`, restart the game, and enable AltBoard on the character select screen.
+Copy this folder into `World of Warcraft\_forever_\Interface\AddOns\` as `AltGlance`, restart the game, and enable AltGlance on the character select screen.
 
 ## Developing
 
@@ -68,11 +70,11 @@ Copy this folder into `World of Warcraft\_forever_\Interface\AddOns\` as `AltBoa
 
 To also upload to CurseForge and Wago, two things are needed once:
 
-1. Create the project on each site, then add its ID to `AltBoard.toc`:
+1. Create the project on each site, then add its ID to `AltGlance.toc`:
    `## X-Curse-Project-ID: 123456` and `## X-Wago-ID: abc123`.
 2. Create an upload token on each site and add it to this repository's secrets (Settings, Secrets and variables, Actions) as `CF_API_KEY` and `WAGO_API_TOKEN`.
 
-Before each release: raise `## Version:` in `AltBoard.toc` and add the version to `CHANGELOG.md`.
+Before each release: raise `## Version:` in `AltGlance.toc` and add the version to `CHANGELOG.md`.
 
 ## Licence
 

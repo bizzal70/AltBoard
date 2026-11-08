@@ -1,5 +1,5 @@
 # Tells the release packager what goes in the zip players download.
-package-as: AltBoard
+package-as: AltGlance
 
 manual-changelog:
   filename: CHANGELOG.md

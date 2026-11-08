@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Links this project into a WoW client's Interface\AddOns folder as "AltBoard"
+  Links this project into a WoW client's Interface\AddOns folder as "AltGlance"
   using a directory junction, so edits here are live in game after /reload.
 
 .EXAMPLE
@@ -17,7 +17,7 @@ $ErrorActionPreference = "Stop"
 
 $from = Split-Path $PSScriptRoot -Parent
 $addons = Join-Path (Join-Path $WowRoot $Flavor) "Interface\AddOns"
-$to = Join-Path $addons "AltBoard"
+$to = Join-Path $addons "AltGlance"
 
 if (-not (Test-Path $addons)) {
     throw "AddOns folder not found: $addons"
@@ -30,10 +30,10 @@ if ($existing) {
     }
     # Removes only the junction, never the files it points to.
     [System.IO.Directory]::Delete($to)
-    if ($Remove) { Write-Host "Unlinked AltBoard" }
+    if ($Remove) { Write-Host "Unlinked AltGlance" }
 }
 
 if (-not $Remove) {
     New-Item -ItemType Junction -Path $to -Target $from | Out-Null
-    Write-Host "Linked AltBoard -> $to"
+    Write-Host "Linked AltGlance -> $to"
 }

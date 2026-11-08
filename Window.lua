@@ -301,7 +301,7 @@ local function CreateWindow()
     Fill(header, 0.16, 0.12, 0.08, 1)
     local title = Label(header, "GameFontNormalLarge")
     title:SetPoint("LEFT", PADDING, 0)
-    title:SetText("AltBoard")
+    title:SetText("AltGlance")
     title:SetTextColor(1, 0.9, 0.75)
 
     local close = CreateFrame("Button", nil, header)

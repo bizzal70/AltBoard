@@ -1,12 +1,12 @@
-# AltBoard
+# AltGlance
 
-All your characters at a glance: level, gold, where they are, rested experience, professions and bag space. One addon, one repository: `bizzal70/AltBoard`.
+All your characters at a glance: level, gold, where they are, rested experience, professions and bag space. One addon, one repository: `bizzal70/AltGlance`.
 
 ## Workflow
 
 - **No local `.git`.** GitHub holds all history. Publish with `tools\Publish.ps1 -Message "..."`, which uses a throwaway temp clone and runs the tests first.
-- **Layout:** the addon's own files (`AltBoard.toc` and the Lua files) sit at the top of the project, because that is what the release packager expects. `tests/`, `tools/` and `.github/` are development-only and are left out of the released zip by `.pkgmeta`.
-- **Testing in game:** `tools\Link-Addon.ps1` junctions this folder into the client's `Interface\AddOns` as `AltBoard`. Edits are live after `/reload`; a new file or a TOC change needs a full client restart.
+- **Layout:** the addon's own files (`AltGlance.toc` and the Lua files) sit at the top of the project, because that is what the release packager expects. `tests/`, `tools/` and `.github/` are development-only and are left out of the released zip by `.pkgmeta`.
+- **Testing in game:** `tools\Link-Addon.ps1` junctions this folder into the client's `Interface\AddOns` as `AltGlance`. Edits are live after `/reload`; a new file or a TOC change needs a full client restart.
 - **Client install:** `C:\Program Files (x86)\World of Warcraft\_forever_\` (`Wow.exe`, product `wowf`), the live client since launch (4 November 2026). The beta folder `_classic_beta_` was removed on 2026-11-02, and its saved data went with it.
 - **Tests:** `python tests/run.py` runs the addon in real Lua 5.1 (the `lupa` pip package) against a fake WoW API in `tests/wow_stub.lua`, loading the files the TOC lists. The tests run before every publish and again on GitHub. They prove the addon's own logic only; whether the real client behaves like the stub can only be checked in game. Three earlier bugs in sibling addons were wrong assumptions about the game that the fake shared, so anything that calls a game function for the first time is wrapped so a surprise cannot put an error on screen.
 - **Releases:** a tag starting with `v` runs `.github/workflows/release.yml`, which uses the BigWigs packager (it recognises this client and builds `-forever.zip` as game version 1.60.1). CurseForge and Wago uploads are skipped until their project IDs are in the TOC and their tokens are in the repository secrets.
@@ -14,7 +14,7 @@ All your characters at a glance: level, gold, where they are, rested experience,
 
 ## How it works
 
-- One record per character in `AltBoardDB.chars[guid]`, account-wide (`SavedVariables`, not per-character): name, realm, class, faction, level, money, zone, xp, xpMax, rested, resting, professions, bagFree, bagTotal, seen.
+- One record per character in `AltGlanceDB.chars[guid]`, account-wide (`SavedVariables`, not per-character): name, realm, class, faction, level, money, zone, xp, xpMax, rested, resting, professions, bagFree, bagTotal, seen.
 - `ns.Snapshot` rewrites the current character's record on login and on the events in `REFRESH_EVENTS` (money, level, experience, resting, zone, skills, bags, logout). Each field is only overwritten when the game gives a usable value, so something withheld for a moment does not erase what was known. It runs under `pcall`.
 - Rested experience for characters not being played is estimated: 5% of a level per 8 hours when they logged out resting, a quarter of that otherwise, capped at 1.5 levels. Those are the original game's rates and are unverified for Forever; the window marks estimates with `~`.
 - `ns.Characters` returns proxies over the saved records (so `key` and `isCurrent` are never written to the saved data), sorted by `sortBy` / `sortDescending`.
@@ -38,3 +38,4 @@ Everything below, unless marked verified, comes from community sources during th
 - Secret values (Midnight combat restrictions) are active. In combat, `UnitHealth`, aura data, and some names and booleans can be secret: arithmetic, comparison, and printing fail. Guard with `issecretvalue`, and pass values straight to widgets (`StatusBar:SetValue`, `Cooldown:SetCooldownFromDurationObject`) instead of doing Lua math. Combat-log parsing is not available.
 - Check `InCombatLockdown()` before touching protected frames and defer to `PLAYER_REGEN_ENABLED`.
 - SavedVariables: initialise in `ADDON_LOADED`. Early beta builds reportedly wrote them but did not read them back; on build 70338 they are read back (confirmed in game 2026-10-11).
+- Renamed from AltBoard to AltGlance on 2026-11-08 (0.2.0), because "Allemano AltBoard" (CurseForge 1719158, Forever) installs into an `AltBoard` folder and uses `/altboard`. Saved data moved from `AltBoardDB` to `AltGlanceDB`; the user's WTF file was copied over by hand. `/alts` kept, `/altboard` replaced by `/altglance`.
