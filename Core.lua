@@ -139,7 +139,9 @@ function ns.Snapshot()
     local professions = ReadProfessions()
     if professions then record.professions = professions end
     local free, total = ReadBags()
-    if free then
+    -- Every character has a backpack, so no bag space at all means the
+    -- bags are not loaded yet (just after logging in), not an empty answer.
+    if free and total > 0 then
         record.bagFree, record.bagTotal = free, total
     end
 
@@ -253,11 +255,14 @@ function AltGlance_OnAddonCompartmentClick()
     ns.ToggleWindow()
 end
 
--- What changes a character's record while they are played.
+-- What changes a character's record while they are played. Not
+-- PLAYER_LOGOUT: by then Forever has cleared money, experience, bags and
+-- professions to 0, and a last read overwrote every character's real
+-- figures with zeros (found 2026-11-08).
 local REFRESH_EVENTS = {
     "PLAYER_MONEY", "PLAYER_LEVEL_UP", "PLAYER_XP_UPDATE", "UPDATE_EXHAUSTION",
     "PLAYER_UPDATE_RESTING", "ZONE_CHANGED_NEW_AREA", "SKILL_LINES_CHANGED",
-    "BAG_UPDATE_DELAYED", "PLAYER_LOGOUT",
+    "BAG_UPDATE_DELAYED", "PLAYER_ENTERING_WORLD",
 }
 
 local frame = CreateFrame("Frame")
@@ -284,6 +289,12 @@ frame:SetScript("OnEvent", function(self, event, loaded)
             pcall(self.RegisterEvent, self, name)
         end
         ns.UpdateMinimapButton()
+        -- Some figures arrive a moment after logging in: read again then.
+        if C_Timer and C_Timer.After then
+            C_Timer.After(5, function()
+                if pcall(ns.Snapshot) then ns.RefreshWindow() end
+            end)
+        end
     end
     -- Reading the character must never put an error on screen.
     if pcall(ns.Snapshot) then

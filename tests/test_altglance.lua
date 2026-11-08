@@ -56,6 +56,28 @@ ME.rested = nil; Fire("UPDATE_EXHAUSTION")
 check(me.rested == 0, "no rested experience is recorded as none")
 ME.rested = 400; Fire("UPDATE_EXHAUSTION")
 
+-- Logging out: Forever has already cleared money, experience, bags and
+-- professions to 0 by then. That must not overwrite the real figures.
+local real = { money = ME.money, xp = ME.xp, bags = ME.bags, professions = ME.professions }
+ME.money, ME.xp, ME.xpMax = 0, 0, 0
+ME.bags = { [0] = { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } }
+ME.professions = {}
+Fire("PLAYER_LOGOUT")
+check(me.money == 30000 and me.xp == 500 and me.bagTotal == 24 and #me.professions == 2,
+    "logging out does not overwrite the character with the zeros the game reports then")
+-- Just after logging in, before the bags have loaded, bag space is not wiped either.
+Fire("BAG_UPDATE_DELAYED")
+check(me.bagTotal == 24, "bags that have not loaded yet (no space at all) are not recorded as empty")
+ME.money, ME.xp, ME.xpMax, ME.bags, ME.professions = real.money, real.xp, 2000, real.bags, real.professions
+-- A second read a moment after logging in picks up figures that arrive late.
+local before = #AFTERS
+Fire("PLAYER_LOGIN")
+check(#AFTERS > before, "logging in reads the character again a moment later")
+ME.money = 31000
+AFTERS[#AFTERS]()
+check(me.money == 31000, "and that later read is recorded")
+ME.money = 30000; Fire("PLAYER_MONEY")
+
 -- a second and third character
 ME = {
     guid = "Player-2", name = "Tolan", class = "Hunter", classFile = "HUNTER", level = 10, money = 500,

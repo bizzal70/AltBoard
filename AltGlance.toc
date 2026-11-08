@@ -2,7 +2,7 @@
 ## Title: AltGlance
 ## Notes: All your characters at a glance: level, gold, where they are, rested experience, professions and bag space. Type /alts.
 ## Author: bizzal70
-## Version: 0.2.0
+## Version: 0.2.1
 ## X-Curse-Project-ID: 1792308
 ## SavedVariables: AltGlanceDB
 ## IconTexture: Interface\Icons\INV_Misc_GroupLooking
