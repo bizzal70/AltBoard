@@ -56,7 +56,7 @@ Other small addons for World of Warcraft: Forever, all free:
 
 ## Installing
 
-Copy this folder into `World of Warcraft\_forever_\Interface\AddOns\` as `AltGlance`, restart the game, and enable AltGlance on the character select screen.
+Install it from [CurseForge](https://www.curseforge.com/wow/addons/altglance) (once approved) with the CurseForge app, or by hand: copy this folder into `World of Warcraft\_forever_\Interface\AddOns\` as `AltGlance`, restart the game, and enable AltGlance on the character select screen.
 
 ## Developing
 
